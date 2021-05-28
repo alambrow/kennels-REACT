@@ -1,5 +1,8 @@
 import React from "react"
 import { Animal } from "./animal/Animal.js"
+import { Employee } from "./employee/Employee.js"
+import { Location } from "./location/Location.js"
+import { Customer } from "./customer/Customer.js"
 import "./Kennel.css"
 
 export const Kennel = () => (
@@ -16,6 +19,26 @@ export const Kennel = () => (
             <Animal />
             <Animal />
             <Animal />
+        </article>
+
+        <h2>Employees</h2>
+        <article className="employees">
+            <Employee />
+            <Employee />
+        </article>
+
+        <h2>Locations</h2>
+        <article className="locations">
+            <Location />
+            <Location />
+        </article>
+
+        <h2>Customers</h2>
+        <article className="customers">
+            <Customer />
+            <Customer />
+            <Customer />
+            <Customer />
         </article>
     </>
 )
