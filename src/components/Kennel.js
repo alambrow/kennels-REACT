@@ -5,6 +5,8 @@ import { Customer } from "./customer/Customer.js"
 import "./Kennel.css"
 import { AnimalProvider } from "./animal/AnimalProvider.js"
 import { AnimalList } from "./animal/AnimalList.js"
+import { EmployeeProvider } from "./employee/EmployeeProvider.js"
+import { EmployeeList } from "./employee/EmployeeList.js"
 
 export const Kennel = () => (
     <>
@@ -24,8 +26,9 @@ export const Kennel = () => (
 
         <h2>Employees</h2>
         <article className="employees">
-            <Employee />
-            <Employee />
+        <EmployeeProvider>
+            <EmployeeList />
+        </EmployeeProvider>
         </article>
 
         <h2>Locations</h2>
