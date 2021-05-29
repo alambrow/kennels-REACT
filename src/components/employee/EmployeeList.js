@@ -20,8 +20,8 @@ export const EmployeeList = () => {
                         <div className="employee__name">
                           Name: { employee.name }
                         </div>
-                        <div className="employee__breed">
-                          Breed: { employee.locationId }
+                        <div className="employee__location">
+                          Location: { employee.locationId }
                         </div>
                         </div>
                     )

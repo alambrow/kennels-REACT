@@ -1,12 +1,13 @@
 import React from "react"
-import { Employee } from "./employee/Employee.js"
-import { Location } from "./location/Location.js"
-import { Customer } from "./customer/Customer.js"
 import "./Kennel.css"
 import { AnimalProvider } from "./animal/AnimalProvider.js"
 import { AnimalList } from "./animal/AnimalList.js"
 import { EmployeeProvider } from "./employee/EmployeeProvider.js"
 import { EmployeeList } from "./employee/EmployeeList.js"
+import { LocationProvider } from "./location/LocationProvider.js"
+import { LocationList } from "./location/LocationList.js"
+import { CustomerProvider } from "./customer/CustomerProvider.js"
+import { CustomerList } from "./customer/CustomerList.js"
 
 export const Kennel = () => (
     <>
@@ -33,16 +34,16 @@ export const Kennel = () => (
 
         <h2>Locations</h2>
         <article className="locations">
-            <Location />
-            <Location />
+        <LocationProvider>
+            <LocationList />
+        </LocationProvider>
         </article>
 
         <h2>Customers</h2>
         <article className="customers">
-            <Customer />
-            <Customer />
-            <Customer />
-            <Customer />
+        <CustomerProvider>
+            <CustomerList />
+        </CustomerProvider>
         </article>
     </>
 )
