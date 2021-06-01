@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider.js"
+import { useHistory } from "react-router-dom"
 import "./Animal.css"
 
 export const AnimalList = () => {
@@ -13,8 +14,17 @@ export const AnimalList = () => {
         getAnimals()
     }, [])
 
+    const history = useHistory()
+
     return (
-        <section className="animals">
+        <>
+            <h2>animals</h2>
+            <button onClick={
+                () => history.push("/animals/create")
+            }>
+                Add Animal
+            </button>
+            <section className="animals">
             {console.log("AnimalList: Render", animals)}
             {
                 animals.map(animal => {
@@ -31,5 +41,6 @@ export const AnimalList = () => {
                 })
             }
         </section>
+    </>
     )
 }

@@ -1,14 +1,16 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { LocationProvider } from "./location/LocationProvider"
+import { LocationContext, LocationProvider } from "./location/LocationProvider"
 import { LocationList } from "./location/LocationList"
 import { AnimalProvider } from "./animal/AnimalProvider"
 import { AnimalList } from "./animal/AnimalList"
-import { CustomerProvider } from "./customer/CustomerProvider"
+import { CustomerContext, CustomerProvider } from "./customer/CustomerProvider"
 import { CustomerList } from "./customer/CustomerList"
 import { EmployeeProvider } from "./employee/EmployeeProvider"
 import { EmployeeList } from "./employee/EmployeeList"
+import { AnimalForm } from "./animal/AnimalForm"
 
+// Animal Form needs to be wrapped
 export const ApplicationViews = () => {
     return (
         <>
@@ -19,9 +21,16 @@ export const ApplicationViews = () => {
             </LocationProvider>
 
             <AnimalProvider>
-                <Route path="/animals">
-                    <AnimalList />
-                </Route>
+                <LocationProvider>
+                    <CustomerProvider>
+                        <Route exact path="/animals">
+                            <AnimalList />
+                        </Route>
+                        <Route exact path="/animals/create">
+                            <AnimalForm />
+                        </Route>
+                    </CustomerProvider>
+                </LocationProvider>
             </AnimalProvider>
 
             <CustomerProvider>
