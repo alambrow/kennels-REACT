@@ -1,14 +1,15 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { LocationContext, LocationProvider } from "./location/LocationProvider"
+import { LocationProvider } from "./location/LocationProvider"
 import { LocationList } from "./location/LocationList"
 import { AnimalProvider } from "./animal/AnimalProvider"
 import { AnimalList } from "./animal/AnimalList"
-import { CustomerContext, CustomerProvider } from "./customer/CustomerProvider"
+import { CustomerProvider } from "./customer/CustomerProvider"
 import { CustomerList } from "./customer/CustomerList"
 import { EmployeeProvider } from "./employee/EmployeeProvider"
 import { EmployeeList } from "./employee/EmployeeList"
 import { AnimalForm } from "./animal/AnimalForm"
+import { EmployeeForm } from "./employee/EmployeeForm"
 
 // Animal Form needs to be wrapped
 export const ApplicationViews = () => {
@@ -40,9 +41,14 @@ export const ApplicationViews = () => {
             </CustomerProvider>
 
             <EmployeeProvider>
-                <Route path="/employees">
-                    <EmployeeList />
-                </Route>
+                <LocationProvider>
+                    <Route exact path="/employees">
+                        <EmployeeList />
+                    </Route>
+                    <Route exact path="/employees/create">
+                        <EmployeeForm />
+                    </Route>
+                </LocationProvider>
             </EmployeeProvider>
         </>
     )
