@@ -10,14 +10,18 @@ import { EmployeeProvider } from "./employee/EmployeeProvider"
 import { EmployeeList } from "./employee/EmployeeList"
 import { AnimalForm } from "./animal/AnimalForm"
 import { EmployeeForm } from "./employee/EmployeeForm"
+import { LocationForm } from "./location/LocationForm"
 
 // Animal Form needs to be wrapped
 export const ApplicationViews = () => {
     return (
         <>
             <LocationProvider>
-                <Route path="/locations">
+                <Route exact path="/locations">
                     <LocationList />
+                </Route>
+                <Route exact path="/locations/create">
+                    <LocationForm />
                 </Route>
             </LocationProvider>
 
