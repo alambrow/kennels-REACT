@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider.js"
 import { useHistory } from "react-router-dom"
 import "./Animal.css"
+import { Link } from 'react-router-dom'
 
 export const AnimalList = () => {
     // temp state to store animals data
@@ -10,7 +11,6 @@ export const AnimalList = () => {
     // invocation of react's useEffect() hook, which grabs data that cannot be handled at init render
     // empty array at end is dependency array; it prevents infinite loop by setting the function depedent on iterating on empty array
     useEffect(() => {
-        console.log("AnimalList: useEffect - getAnimals")
         getAnimals()
     }, [])
 
@@ -22,25 +22,25 @@ export const AnimalList = () => {
             <button onClick={
                 () => history.push("/animals/create")
             }>
-                Add Animal
+                Make Reservation
             </button>
-            <section className="animals">
-            {console.log("AnimalList: Render", animals)}
-            {
-                animals.map(animal => {
-                    return (
+
+            <div className="animals">
+                {
+                    animals.map(animal => 
                         <div className="animal" id={`animal--${animal.id}`}>
                         <div className="animal__name">
-                          Name: { animal.name }
+                        <Link to={`/animals/detail/${animal.id}`}>
+                          { animal.name }
+                        </Link>
                         </div>
                         <div className="animal__breed">
                           Breed: { animal.breed }
                         </div>
                         </div>
                     )
-                })
-            }
-        </section>
-    </>
+                }
+            </div>
+        </>
     )
 }
