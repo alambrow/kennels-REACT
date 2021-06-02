@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react"
 import { LocationContext } from "./LocationProvider.js"
 import { useHistory } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import "./Location.css"
 
+// TODO: add no. of employees and animals
 export const LocationList = () => {
     const { locations, getLocations } = useContext(LocationContext)
 
     useEffect(() => {
-        console.log("LocationList: useEffect - getLocations")
         getLocations()
     }, [])
 
@@ -21,17 +22,25 @@ export const LocationList = () => {
         }>
             Add Location
         </button>
+
         <section className="locations">
-            {console.log("LocationList: Render", locations)}
             {
                 locations.map(location => {
                     return (
                         <div className="location" id={`location--${location.id}`}>
                         <div className="location__name">
-                          Name: { location.name }
+                          <Link to={`/locations/detail/${location.id}`}>
+                            { location.name }
+                          </Link>
                         </div>
                         <div className="location__address">
                           Address: { location.address }
+                        </div>
+                        <div>
+                            {location.employees.length} Employees
+                        </div>
+                        <div>
+                            {location.animals.length} Animals
                         </div>
                         </div>
                     )

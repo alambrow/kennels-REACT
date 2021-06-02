@@ -13,18 +13,24 @@ import { EmployeeForm } from "./employee/EmployeeForm"
 import { LocationForm } from "./location/LocationForm"
 import { AnimalDetail } from "./animal/AnimalDetail"
 import { EmployeeDetail } from "./employee/EmployeeDetail"
+import { LocationDetail } from "./location/LocationDetails"
 
 // Animal Form needs to be wrapped
 export const ApplicationViews = () => {
     return (
         <>
             <LocationProvider>
-                <Route exact path="/locations">
-                    <LocationList />
-                </Route>
-                <Route exact path="/locations/create">
-                    <LocationForm />
-                </Route>
+                <EmployeeProvider>
+                    <Route exact path="/locations">
+                        <LocationList />
+                    </Route>
+                    <Route exact path="/locations/create">
+                        <LocationForm />
+                    </Route>
+                    <Route exact path="/locations/detail/:locationId(\d+)">
+                        <LocationDetail />
+                    </Route>
+                </EmployeeProvider>
             </LocationProvider>
 
             <AnimalProvider>
