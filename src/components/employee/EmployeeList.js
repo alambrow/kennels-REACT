@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider.js"
 import { useHistory } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import "./Employee.css"
 
 export const EmployeeList = () => {
@@ -21,6 +22,7 @@ export const EmployeeList = () => {
         }>
             Hire Employee
         </button>
+
         <section className="employees">
             {console.log("EmployeeList: Render", employees)}
             {
@@ -28,11 +30,13 @@ export const EmployeeList = () => {
                     return (
                         <div className="employee" id={`employee--${employee.id}`}>
                         <div className="employee__name">
-                          Name: { employee.name }
+                            <Link to={`/employees/detail/${employee.id}`}>
+                                { employee.name }
+                            </Link>
                         </div>
-                        <div className="employee__location">
-                          Location: { employee.locationId }
-                        </div>
+                            <div className="employee__location">
+                            Location: { employee.locationId }
+                            </div>
                         </div>
                     )
                 })
