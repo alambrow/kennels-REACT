@@ -15,12 +15,11 @@ import { AnimalDetail } from "./animal/AnimalDetail"
 import { EmployeeDetail } from "./employee/EmployeeDetail"
 import { LocationDetail } from "./location/LocationDetails"
 
-// Animal Form needs to be wrapped
+
 export const ApplicationViews = () => {
     return (
         <>
             <LocationProvider>
-                <EmployeeProvider>
                     <Route exact path="/locations">
                         <LocationList />
                     </Route>
@@ -30,12 +29,9 @@ export const ApplicationViews = () => {
                     <Route exact path="/locations/detail/:locationId(\d+)">
                         <LocationDetail />
                     </Route>
-                </EmployeeProvider>
-            </LocationProvider>
 
             <AnimalProvider>
-                <LocationProvider>
-                    <CustomerProvider>
+                <CustomerProvider>
                         <Route exact path="/animals">
                             <AnimalList />
                         </Route>
@@ -46,7 +42,6 @@ export const ApplicationViews = () => {
                             <AnimalDetail />
                         </Route>
                     </CustomerProvider>
-                </LocationProvider>
             </AnimalProvider>
 
             <CustomerProvider>
@@ -56,7 +51,6 @@ export const ApplicationViews = () => {
             </CustomerProvider>
 
             <EmployeeProvider>
-                <LocationProvider>
                     <Route exact path="/employees">
                         <EmployeeList />
                     </Route>
@@ -66,8 +60,9 @@ export const ApplicationViews = () => {
                     <Route exact path="/employees/detail/:employeeId(\d+)">
                         <EmployeeDetail />
                     </Route>
-                </LocationProvider>
             </EmployeeProvider>
+            
+            </LocationProvider>
         </>
     )
 }
