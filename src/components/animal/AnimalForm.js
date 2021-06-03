@@ -51,7 +51,8 @@ export const AnimalForm = () => {
           addAnimal({
               name: animal.name,
               locationId: parseInt(animal.locationId),
-              customerId: parseInt(animal.customerId)
+              customerId: parseInt(animal.customerId),
+              id: animal.id
           })
           .then(() => history.push("/animals"))
         }

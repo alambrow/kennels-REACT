@@ -29,7 +29,9 @@ export const ApplicationViews = () => {
                             <LocationForm />
                         </Route>
                         <Route exact path="/locations/detail/:locationId(\d+)" render={ props => <LocationDetail {...props} /> }>
-                           
+                        </Route>
+                        <Route path="/locations/edit/:locationId(\d+)">
+                            <LocationForm />
                         </Route>
                     </AnimalProvider>
                 </EmployeeProvider>

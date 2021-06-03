@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { LocationContext } from "./LocationProvider"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import "./Location.css"
 
 export const LocationDetail = () => {
@@ -13,6 +13,7 @@ export const LocationDetail = () => {
         setLocation(thisLocation)
     }, [locationId])
 
+    const history = useHistory()
  
     return (
         <section className="location" key={location.id}>
@@ -30,6 +31,9 @@ export const LocationDetail = () => {
                     <div className="location__animal__name"> {animal.name} </div>    
                 )}
             </div>
+            <button onClick={() => {
+                history.push(`/locations/edit/${location.id}`)
+            }}>Edit</button>
         </section>
     )
 }

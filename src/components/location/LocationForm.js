@@ -1,35 +1,54 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { LocationContext } from "./LocationProvider";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export const LocationForm = () => {
-    const { addLocation } = useContext(LocationContext)
+    const { locations, addLocation, getLocations, updateLocation, getLocationById } = useContext(LocationContext)
+    const [ location, setLocation ] = useState({employees: [], animals: []})
+    const [isLoading, setIsLoading] = useState(true)
     
-    const [location, setLocation] = useState({
-        name: "",
-        address: "",
-        id: 0
-    })
-
+    const { locationId } = useParams()
     const history = useHistory()
 
     const handleControlledInputChange = (event) => {
-        const newLocation = {...location}
-        newLocation[event.target.id] = event.target.value
+        const newLocation = { ...location }
+        newLocation[event.target.name] = event.target.value
         setLocation(newLocation)
     }
 
-    const handleClickSavelocation = (event) => {
-        event.preventDefault()
-
-        const newLocation = {
-            name: location.name,
-            address: location.address
-        }
-
-        addLocation(newLocation)
+    const handleSaveLocation = () => {
+        setIsLoading(true)
+        if (locationId) {
+            // TODO: invoke updateLocation or addLocation (from provider)
+            updateLocation({
+                id: location.id,
+                name: location.name,
+                address: location.address
+            })
+            .then(() => history.push(`/locations/detail/${location.id}`))
+        } else {
+            addLocation({
+              name: location.name,
+              address: location.address
+            })
             .then(() => history.push("/locations"))
+        }
     }
+
+    useEffect(() => {
+        getLocations().then(() => {
+            if (locationId) {
+                getLocationById(locationId)
+                .then(location => {
+                    setLocation(location)
+                    setIsLoading(false)
+                })
+            } else {
+                setIsLoading(false)
+            }
+        })
+    }, [])
+
 
     return (
         <form className="newlocationForm">
@@ -46,7 +65,7 @@ export const LocationForm = () => {
             <input type="text" id="address" required autoFocus className="form-control" placeholder="location address" value={location.address} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
-        <button className="btn btn-primary" onClick={handleClickSavelocation}>
+        <button className="btn btn-primary" onClick={handleSaveLocation}>
           Save location
         </button>
         </form>
