@@ -15,7 +15,7 @@ export const LocationDetail = () => {
 
  
     return (
-        <section className="location">
+        <section className="location" key={location.id}>
             <h3 className="location__name"> {location.name} </h3>
             <div className="location__address"> {location.address} </div>
             <div className="location__employees"> 

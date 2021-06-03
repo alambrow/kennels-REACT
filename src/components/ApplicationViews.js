@@ -2,7 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { LocationProvider } from "./location/LocationProvider"
 import { LocationList } from "./location/LocationList"
-import { AnimalProvider } from "./animal/AnimalProvider"
+import { AnimalContext, AnimalProvider } from "./animal/AnimalProvider"
 import { AnimalList } from "./animal/AnimalList"
 import { CustomerProvider } from "./customer/CustomerProvider"
 import { CustomerList } from "./customer/CustomerList"
@@ -20,18 +20,23 @@ export const ApplicationViews = () => {
     return (
         <>
             <LocationProvider>
-                    <Route exact path="/locations">
-                        <LocationList />
-                    </Route>
-                    <Route exact path="/locations/create">
-                        <LocationForm />
-                    </Route>
-                    <Route exact path="/locations/detail/:locationId(\d+)">
-                        <LocationDetail />
-                    </Route>
+                <EmployeeProvider>
+                    <AnimalProvider>
+                        <Route exact path="/locations">
+                            <LocationList />
+                        </Route>
+                        <Route exact path="/locations/create">
+                            <LocationForm />
+                        </Route>
+                        <Route exact path="/locations/detail/:locationId(\d+)" render={ props => <LocationDetail {...props} /> }>
+                           
+                        </Route>
+                    </AnimalProvider>
+                </EmployeeProvider>
+            </LocationProvider>
 
             <AnimalProvider>
-                <CustomerProvider>
+                <LocationProvider>
                         <Route exact path="/animals">
                             <AnimalList />
                         </Route>
@@ -41,7 +46,7 @@ export const ApplicationViews = () => {
                         <Route exact path="/animals/detail/:animalId(\d+)">
                             <AnimalDetail />
                         </Route>
-                    </CustomerProvider>
+                </LocationProvider>
             </AnimalProvider>
 
             <CustomerProvider>
@@ -61,8 +66,6 @@ export const ApplicationViews = () => {
                         <EmployeeDetail />
                     </Route>
             </EmployeeProvider>
-            
-            </LocationProvider>
         </>
     )
 }

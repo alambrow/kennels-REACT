@@ -10,7 +10,8 @@ export const EmployeeDetail = () => {
     const { employeeId } = useParams()
 
     useEffect(() => {
-        const thisEmployee = employees.find(a => a.id === parseInt(employeeId) || { location: {}})
+        const thisEmployee = employees.find(a => a.id === parseInt(employeeId)) || { location: {}}
+        
         setEmployee(thisEmployee)
     }, [employeeId])
 

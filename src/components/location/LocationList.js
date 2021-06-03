@@ -27,8 +27,8 @@ export const LocationList = () => {
             {
                 locations.map(location => {
                     return (
-                        <div className="location" id={`location--${location.id}`}>
-                        <div className="location__name">
+                        <div className="location" id={`location--${location.id}`} key={`${location.id}`}>
+                        <div className="location__name" >
                           <Link to={`/locations/detail/${location.id}`}>
                             { location.name }
                           </Link>
