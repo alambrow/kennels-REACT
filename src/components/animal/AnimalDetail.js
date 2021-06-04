@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from "react"
 import { AnimalContext } from "./AnimalProvider"
 import "./Animal.css"
-import { useParams, useHistory } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
 
 
-export const AnimalDetail = () => {
-    const { animals, releaseAnimal } = useContext(AnimalContext)
-    const [ animal, setFiltered ] = useState({ location: {}, customer: {} })
+export const AnimalDetail = ({ animal }) => {
+    const { releaseAnimal } = useContext(AnimalContext)
+    const [ animals, setAnimal ] = useState({ location: {}, customer: {} })
     const history = useHistory()
 
-    // hook function useParams() allows code to read route parameter from URL
-    // const { animalId } = useParams();
-    // we are no longer accessing the animalId from the URL string
+    const animalId = parseInt(animal.id)
 
-    // dependency stops once animal id is found
-    // useEffect(() => {
-    //     const thisAnimal = animals.find(a => a.id === parseInt(animalId)) || { location: {}, customer: {} }
-    //     setAnimal(thisAnimal)
-    // }, [animalId])
+    useEffect(() => {
+        setAnimal(animal)
+    }, [animalId])
 
 
     const handleRelease = () => {
