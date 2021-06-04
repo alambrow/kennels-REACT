@@ -10,6 +10,7 @@ export const AnimalProvider = (props) => {
     
     // invokes useState hook to hold and set animal array
     const [animals, setAnimals] = useState([])
+    const [ searchTerms, setSearchTerms ] = useState("")
     
     // function to grab animal data from API; defined within Provider function
     // Q: why are query string parameters breaking this fetch call?
@@ -58,7 +59,7 @@ export const AnimalProvider = (props) => {
     // and addAnimal for children components
     return (
         <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal, releaseAnimal, updateAnimal, getAnimalById
+            animals, getAnimals, addAnimal, releaseAnimal, updateAnimal, getAnimalById, searchTerms, setSearchTerms
         }}>
             {props.children}
         </AnimalContext.Provider>

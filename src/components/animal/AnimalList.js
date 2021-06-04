@@ -1,46 +1,62 @@
-import React, { useContext, useEffect } from "react"
-import { AnimalContext } from "./AnimalProvider.js"
-import { useHistory } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
+import { AnimalContext } from "./AnimalProvider"
+import { AnimalDetail } from "./AnimalDetail"
 import "./Animal.css"
-import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
 
 export const AnimalList = () => {
-    // temp state to store animals data
-    const { animals, getAnimals } = useContext(AnimalContext)
+  const { animals, getAnimals, searchTerms } = useContext(AnimalContext)
 
-    // invocation of react's useEffect() hook, which grabs data that cannot be handled at init render
-    // empty array at end is dependency array; it prevents infinite loop by setting the function depedent on iterating on empty array
-    useEffect(() => {
-        getAnimals()
-    }, [])
+  // Since you are no longer ALWAYS displaying all of the animals
+  const [ filteredAnimals, setFiltered ] = useState([])
+  const history = useHistory()
+    
+  // Empty dependency array - useEffect only runs after first render
+  useEffect(() => {
+      getAnimals()
+  }, [])
 
-    const history = useHistory()
+  // useEffect dependency array with dependencies - will run if dependency changes (state)
+  // searchTerms will cause a change
+  useEffect(() => {
+    if (searchTerms !== "") {
+      // If the search field is not blank, display matching animals
+      const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms))
+      setFiltered(subset)
+    } else {
+      // If the search field is blank, display all animals
+      setFiltered(animals)
+    }
+  }, [searchTerms, animals])
 
-    return (
-        <>
-            <h2>animals</h2>
-            <button onClick={
-                () => history.push("/animals/create")
-            }>
-                Make Reservation
-            </button>
-
-            <div className="animals">
-                {
-                    animals.map(animal => 
-                        <div className="animal" id={`animal--${animal.id}`}>
-                        <div className="animal__name">
-                        <Link to={`/animals/detail/${animal.id}`}>
-                          { animal.name }
-                        </Link>
-                        </div>
-                        <div className="animal__breed">
-                          Breed: { animal.breed }
-                        </div>
-                        </div>
-                    )
-                }
-            </div>
-        </>
-    )
+  return (
+    <>
+      <h1>Animals</h1>
+      <button onClick={() => history.push("/animals/create")}>
+          Make Reservation
+      </button>
+      <div className="animals">
+      {
+        filteredAnimals.map(animal => {
+            return <AnimalDetail key={animal.id} animal={animal} />
+          })
+      }
+      </div>
+    </>
+  )
 }
+
+// {
+//     animals.map(animal => 
+//         <div className="animal" id={`animal--${animal.id}`}>
+//         <div className="animal__name">
+//         <Link to={`/animals/detail/${animal.id}`}>
+//           { animal.name }
+//         </Link>
+//         </div>
+//         <div className="animal__breed">
+//           Breed: { animal.breed }
+//         </div>
+//         </div>
+//     )
+// }

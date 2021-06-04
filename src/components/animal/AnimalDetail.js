@@ -6,23 +6,20 @@ import { useParams, useHistory } from "react-router-dom"
 
 export const AnimalDetail = () => {
     const { animals, releaseAnimal } = useContext(AnimalContext)
-    const [ animal, setAnimal ] = useState({ location: {}, customer: {} })
+    const [ animal, setFiltered ] = useState({ location: {}, customer: {} })
+    const history = useHistory()
 
-    /*
-        Given the example URL above, this will store the value
-        of 5 in the animalId variable
-    */
     // hook function useParams() allows code to read route parameter from URL
-    const { animalId } = useParams();
+    // const { animalId } = useParams();
+    // we are no longer accessing the animalId from the URL string
 
     // dependency stops once animal id is found
-    useEffect(() => {
-        const thisAnimal = animals.find(a => a.id === parseInt(animalId)) || { location: {}, customer: {} }
+    // useEffect(() => {
+    //     const thisAnimal = animals.find(a => a.id === parseInt(animalId)) || { location: {}, customer: {} }
+    //     setAnimal(thisAnimal)
+    // }, [animalId])
 
-        setAnimal(thisAnimal)
-    }, [animalId])
 
-    const history = useHistory()
     const handleRelease = () => {
         releaseAnimal(animal.id)
             .then(() => {
