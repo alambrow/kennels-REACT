@@ -2,7 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { LocationProvider } from "./location/LocationProvider"
 import { LocationList } from "./location/LocationList"
-import { AnimalContext, AnimalProvider } from "./animal/AnimalProvider"
+import { AnimalProvider } from "./animal/AnimalProvider"
 import { AnimalList } from "./animal/AnimalList"
 import { CustomerProvider } from "./customer/CustomerProvider"
 import { CustomerList } from "./customer/CustomerList"
@@ -63,6 +63,7 @@ export const ApplicationViews = () => {
             </CustomerProvider>
 
             <EmployeeProvider>
+                <LocationProvider>
                     <Route exact path="/employees">
                         <EmployeeList />
                     </Route>
@@ -72,6 +73,10 @@ export const ApplicationViews = () => {
                     <Route exact path="/employees/detail/:employeeId(\d+)">
                         <EmployeeDetail />
                     </Route>
+                    <Route path="/employees/edit/:employeeId(\d+)">
+                        <EmployeeForm />
+                    </Route>
+                </LocationProvider>
             </EmployeeProvider>
         </>
     )

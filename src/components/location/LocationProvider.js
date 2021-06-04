@@ -20,6 +20,7 @@ export const LocationProvider = (props) => {
             body: JSON.stringify(locatObj)
         })
         .then(res => res.json())
+        .then(getLocations)
     }
 
     const updateLocation = locatObj => {
