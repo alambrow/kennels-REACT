@@ -19,17 +19,18 @@ export const LocationProvider = (props) => {
             },
             body: JSON.stringify(locatObj)
         })
-        .then(getLocations)
+        .then(res => res.json())
     }
 
-    const updateLocation = location => {
-        return fetch(`http://localhost:8088/locations/${location.id}`, {
+    const updateLocation = locatObj => {
+        return fetch(`http://localhost:8088/locations/${locatObj.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(location)
+            body: JSON.stringify(locatObj)
         })
+        .then(res => res.json())
         .then(getLocations)
     }
 
