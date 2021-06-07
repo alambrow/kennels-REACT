@@ -4,13 +4,18 @@ import { useParams, useHistory } from "react-router-dom"
 import "./Employee.css"
 
 export const EmployeeDetail = () => {
-    const { employees } = useContext(EmployeeContext)
-    const [ employee, setEmployee ] = useState({location: {}})
+    const { getEmployeeById } = useContext(EmployeeContext)
+    const [ employee, setRemoteEmployee ] = useState({location: {}})
     const { employeeId } = useParams()
 
     useEffect(() => {
-        const thisEmployee = employees.find(a => a.id === parseInt(employeeId)) || { location: {}}
-        setEmployee(thisEmployee)
+        if (employeeId) {
+            getEmployeeById(employeeId).then( (employeeData) => {
+                setRemoteEmployee(employeeData)
+            })
+        } else {
+            setRemoteEmployee(employee)
+        }
     }, [employeeId])
 
     const history = useHistory()
