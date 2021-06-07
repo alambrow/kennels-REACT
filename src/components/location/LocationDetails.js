@@ -4,13 +4,18 @@ import { useParams, useHistory } from "react-router-dom"
 import "./Location.css"
 
 export const LocationDetail = () => {
-    const { locations } = useContext(LocationContext)
-    const [ location, setLocation ] = useState({employees: [], animals: []})
+    const { locations, getLocationById } = useContext(LocationContext)
+    const [ location, setRemoteLocation ] = useState({employees: [], animals: []})
     const { locationId } = useParams()
 
     useEffect(() => {
-        const thisLocation = locations.find(a => a.id === parseInt(locationId)) || {employees: [], animals: []}
-        setLocation(thisLocation)
+        if (locationId) {
+            getLocationById(locationId).then( (locationData) => {
+                setRemoteLocation(locationData)
+            })
+        } else {
+            setRemoteLocation(location)
+        }
     }, [locationId])
 
     const history = useHistory()
