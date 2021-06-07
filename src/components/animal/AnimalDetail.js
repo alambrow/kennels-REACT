@@ -5,17 +5,23 @@ import {  useHistory, useParams } from "react-router-dom"
 
 
 export const AnimalDetail = ({ animal }) => {
-    const { releaseAnimal } = useContext(AnimalContext)
-    const [ animals, setAnimal ] = useState({ location: {}, customer: {} })
+    const { releaseAnimal, getAnimalById } = useContext(AnimalContext)
     const history = useHistory()
-  
-    const animalId = parseInt(animal.id)
-    
-    useEffect(() => {
-        setAnimal(animal)
+    const [localAnimalState, setRemoteAnimal] = useState({location: {}, customer: {}})
+    const {animalId} = useParams();
+
+    useEffect( () => {
+        console.log(animalId)
+        if (animalId) {
+            getAnimalById(animalId).then( (animalData) => {
+                setRemoteAnimal(animalData)
+            })
+        } else {
+            setRemoteAnimal(animal)
+        }
     }, [animalId])
 
-
+    
     const handleRelease = () => {
         releaseAnimal(animal.id)
             .then(() => {
@@ -25,13 +31,13 @@ export const AnimalDetail = ({ animal }) => {
         
     return (
     <section className="animal">
-        <h3 className="animal__name">{ animal.name }</h3>
-        <div className="animal__breed">{ animal.breed }</div>
-        <div className="animal__location">Location: { animal.location.name }</div>
-        <div className="animal__owner">Customer: { animal.customer.name }</div>
+        <h3 className="animal__name">{ localAnimalState.name }</h3>
+        <div className="animal__breed">{ localAnimalState.breed }</div>
+        <div className="animal__location">Location: { localAnimalState.location.name }</div>
+        <div className="animal__owner">Customer: { localAnimalState.customer.name }</div>
         <button onClick={handleRelease}>Release Animal</button>
         <button onClick={() => {
-            history.push(`/animals/edit/${animal.id}`)
+            history.push(`/animals/edit/${localAnimalState.id}`)
         }}>Edit</button>
     </section>
     )
