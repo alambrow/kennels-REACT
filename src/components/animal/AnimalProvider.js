@@ -9,7 +9,7 @@ export const AnimalContext = createContext()
 export const AnimalProvider = (props) => {
     
     // invokes useState hook to hold and set animal array
-    const [animals, setAnimals] = useState([])
+    const [animals, setAnimals, setAnimal] = useState([])
     const [ searchTerms, setSearchTerms ] = useState("")
     
     // function to grab animal data from API; defined within Provider function
@@ -36,18 +36,18 @@ export const AnimalProvider = (props) => {
         return fetch(`http://localhost:8088/animals/${animalId}`, {
             method: "DELETE"
         })
-            .then(getAnimals)
+        .then(getAnimals)
     }
 
-    const updateAnimal = animal => {
-        return fetch(`http://localhost:8088/animals/${animal.id}`, {
+    const updateAnimal = animalObj => {
+        return fetch(`http://localhost:8088/animals/${animalObj.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(animal)
+          body: JSON.stringify(animalObj)
         })
-          .then(getAnimals)
+        .then(getAnimals)
     }
 
     const getAnimalById = animalId => {
@@ -59,7 +59,7 @@ export const AnimalProvider = (props) => {
     // and addAnimal for children components
     return (
         <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal, releaseAnimal, updateAnimal, getAnimalById, searchTerms, setSearchTerms
+            animals, getAnimals, addAnimal, releaseAnimal, updateAnimal, getAnimalById, searchTerms, setSearchTerms, setAnimals, setAnimal
         }}>
             {props.children}
         </AnimalContext.Provider>

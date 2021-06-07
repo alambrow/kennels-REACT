@@ -31,16 +31,18 @@ export const AnimalForm = () => {
       setAnimal(newAnimal)
     }
 
-    const handleSaveAnimal = () => {
+    const handleSaveAnimal = (animal) => {
+
       if (parseInt(animal.locationId) === 0) {
           window.alert("Please select a location")
       } else {
         //disable the button - no extra clicks
         setIsLoading(true);
+        debugger
         if (animalId){
           //PUT - update
           updateAnimal({
-              id: animal.id,
+              id: parseInt(animal.id),
               name: animal.name,
               locationId: parseInt(animal.locationId),
               customerId: parseInt(animal.customerId)
@@ -118,8 +120,8 @@ export const AnimalForm = () => {
         <button className="btn btn-primary"
           disabled={isLoading}
           onClick={event => {
-            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-            handleSaveAnimal()
+            event.preventDefault() // Prevents browser from submitting the form and refreshing the page
+            handleSaveAnimal(animal)
           }}>
         {animalId ? <>Save Animal</> : <>Add Animal</>}</button>
       </form>

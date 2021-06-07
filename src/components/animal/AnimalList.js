@@ -20,8 +20,10 @@ export const AnimalList = () => {
   // searchTerms will cause a change
   useEffect(() => {
     if (searchTerms !== "") {
+      // convert search terms to lower case to match lower case chars of animal database
+      const newSearchTerms = searchTerms.toLowerCase()
       // If the search field is not blank, display matching animals
-      const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms))
+      const subset = animals.filter(animal => animal.name.toLowerCase().includes(newSearchTerms))
       setFiltered(subset)
     } else {
       // If the search field is blank, display all animals
@@ -37,8 +39,8 @@ export const AnimalList = () => {
       </button>
       <div className="animals">
       {
-        filteredAnimals.map(animal => {
-            return <AnimalDetail key={animal.id} animal={animal} />
+        filteredAnimals.map(animalObj => {
+            return <AnimalDetail key={animalObj.id} animal={animalObj} />
           })
       }
       </div>
