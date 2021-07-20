@@ -28,15 +28,17 @@ export const EmployeeForm = () => {
 
           if (employeeId) {
             updateEmployee({
-              id: employee.id,
-              name: employee.name,
-              locationId: parseInt(employee.locationId)
+              "id": employee.id,
+              "name": employee.name,
+              "address": employee.address,
+              "locationId": parseInt(employee.locationId)
             })
             .then(() => history.push(`/employees/detail/${employee.id}`))
           } else {
             addEmployee({
-              name: employee.name,
-              locationId: parseInt(employee.locationId)
+              "name": employee.name,
+              "address": employee.address,
+              "locationId": parseInt(employee.locationId)
             })
             .then(() => history.push("/employees"))
           }
@@ -69,7 +71,14 @@ export const EmployeeForm = () => {
             value={employee.name}/>
           </div>
         </fieldset>
-
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="address">Employee address:</label>
+            <input type="text" id="address" required autoFocus className="form-control" placeholder="employee address" value={employee.name} 
+            onChange={handleControlledInputChange} 
+            value={employee.address}/>
+          </div>
+        </fieldset>
         <fieldset>
           <div className="form-group">
             <label htmlFor="location">Assign to location: </label>

@@ -32,8 +32,8 @@ export const AnimalDetail = ({ animal }) => {
     <section className="animal">
         <h3 className="animal__name">{ localAnimalState.name }</h3>
         <div className="animal__breed">{ localAnimalState.breed }</div>
-        <div className="animal__location">Location: { localAnimalState.location.name }</div>
-        <div className="animal__owner">Customer: { localAnimalState.customer.full_name }</div>
+        <div className="animal__location">Location: { localAnimalState.location_id }</div>
+        <div className="animal__owner">Customer: { localAnimalState.customer_id }</div>
         <button onClick={handleRelease}>Release Animal</button>
         <button onClick={() => {
             history.push(`/animals/edit/${localAnimalState.id}`)

@@ -32,7 +32,6 @@ export const AnimalForm = () => {
     }
 
     const handleSaveAnimal = (animal) => {
-      debugger
       if (parseInt(animal.locationId) === 0) {
           window.alert("Please select a location")
       } else {
@@ -43,8 +42,8 @@ export const AnimalForm = () => {
           updateAnimal({
               "id": parseInt(animal.id),
               "name": animal.name,
-              "status": "Recreation",
-              "breed": "kitty kat",
+              "status": animal.status,
+              "breed": animal.breed,
               "location_id": parseInt(animal.locationId),
               "customer_id": parseInt(animal.customerId)
           })
@@ -53,10 +52,10 @@ export const AnimalForm = () => {
           //POST - add
           addAnimal({
               "name": animal.name,
-              "status": "Recreation",
-              "breed": "kitty kat",
+              "status": animal.status,
+              "breed": animal.breed,
               "location_id": parseInt(animal.locationId),
-              "customer_id": parseInt(animal.customerId),
+              "customer_id": parseInt(animal.customerId)
           })
           .then(() => history.push("/animals"))
         }
@@ -91,6 +90,24 @@ export const AnimalForm = () => {
             placeholder="Animal name"
             onChange={handleControlledInputChange}
             defaultValue={animal.name}/>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="animalStatus">Status: </label>
+            <input type="text" id="animalStatus" name="status" required autoFocus className="form-control"
+            placeholder="Animal status"
+            onChange={handleControlledInputChange}
+            defaultValue={animal.status}/>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="animalBreed">Status: </label>
+            <input type="text" id="animalBreed" name="breed" required autoFocus className="form-control"
+            placeholder="Breed"
+            onChange={handleControlledInputChange}
+            defaultValue={animal.breed}/>
           </div>
         </fieldset>
         <fieldset>
