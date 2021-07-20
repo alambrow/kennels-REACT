@@ -9,7 +9,7 @@ export const CustomerList = () => {
         console.log("CustomerList: useEffect - getCustomers")
         getCustomers()
     }, [])
-
+    console.log(customers, "customers")
     return (
         <section className="customers">
             {console.log("CustomerList: Render", customers)}
@@ -18,7 +18,7 @@ export const CustomerList = () => {
                     return (
                         <div className="customer" id={`customer--${customer.id}`}>
                         <div className="customer__name">
-                          Name: { customer.name }
+                          Name: { customer.full_name }
                         </div>
                         <div className="customer__address">
                           Address: { customer.address }

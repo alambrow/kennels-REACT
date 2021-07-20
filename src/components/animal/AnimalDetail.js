@@ -11,7 +11,6 @@ export const AnimalDetail = ({ animal }) => {
     const {animalId} = useParams();
 
     useEffect( () => {
-        console.log(animalId)
         if (animalId) {
             getAnimalById(animalId).then( (animalData) => {
                 setRemoteAnimal(animalData)
@@ -28,13 +27,13 @@ export const AnimalDetail = ({ animal }) => {
                 history.push("/animals")
             })
         }
-        
+    console.log(localAnimalState, "local animal state")
     return (
     <section className="animal">
         <h3 className="animal__name">{ localAnimalState.name }</h3>
         <div className="animal__breed">{ localAnimalState.breed }</div>
         <div className="animal__location">Location: { localAnimalState.location.name }</div>
-        <div className="animal__owner">Customer: { localAnimalState.customer.name }</div>
+        <div className="animal__owner">Customer: { localAnimalState.customer.full_name }</div>
         <button onClick={handleRelease}>Release Animal</button>
         <button onClick={() => {
             history.push(`/animals/edit/${localAnimalState.id}`)

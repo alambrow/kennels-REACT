@@ -15,7 +15,7 @@ export const AnimalProvider = (props) => {
     // function to grab animal data from API; defined within Provider function
     // Q: why are query string parameters breaking this fetch call?
     const getAnimals = () => {
-        return fetch("http://localhost:8088/animals?_expand=customer&_expand=location&_sort=location.id")
+        return fetch("http://localhost:8088/animals")
         .then (res => res.json())
         .then(setAnimals)
     }
@@ -51,7 +51,7 @@ export const AnimalProvider = (props) => {
     }
 
     const getAnimalById = animalId => {
-        return fetch(`http://localhost:8088/animals/${animalId}?_expand=customer&_expand=location&_sort=location.id`)
+        return fetch(`http://localhost:8088/animals/${animalId}`)
         .then (res => res.json())
     }
 

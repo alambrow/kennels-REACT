@@ -13,7 +13,7 @@ export const EmployeeList = () => {
     }, [])
 
     const history = useHistory()
-
+    console.log("EmployeeList: Render", employees)
     return (
         <>
         <h2>Employees</h2>
@@ -24,7 +24,7 @@ export const EmployeeList = () => {
         </button>
 
         <section className="employees">
-            {console.log("EmployeeList: Render", employees)}
+            
             {
                 employees.map(employee => {
                     return (
@@ -35,7 +35,9 @@ export const EmployeeList = () => {
                             </Link>
                         </div>
                             <div className="employee__location">
-                            Location: { employee.locationId }
+                            Location: { employee.location.address }
+                            <br/>
+                            Address: {employee.location.name}
                             </div>
                         </div>
                     )

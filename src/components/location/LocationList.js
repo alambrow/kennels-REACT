@@ -37,10 +37,10 @@ export const LocationList = () => {
                           Address: { location.address }
                         </div>
                         <div>
-                            {location.employees.length} Employees
+                            Unknown No. of Employees
                         </div>
                         <div>
-                            {location.animals.length} Animals
+                            Unknown No. of Animals
                         </div>
                         </div>
                     )
