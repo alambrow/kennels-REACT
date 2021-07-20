@@ -32,29 +32,31 @@ export const AnimalForm = () => {
     }
 
     const handleSaveAnimal = (animal) => {
-
+      debugger
       if (parseInt(animal.locationId) === 0) {
           window.alert("Please select a location")
       } else {
         //disable the button - no extra clicks
         setIsLoading(true);
-        debugger
         if (animalId){
           //PUT - update
           updateAnimal({
-              id: parseInt(animal.id),
-              name: animal.name,
-              locationId: parseInt(animal.locationId),
-              customerId: parseInt(animal.customerId)
+              "id": parseInt(animal.id),
+              "name": animal.name,
+              "status": "Recreation",
+              "breed": "kitty kat",
+              "location_id": parseInt(animal.locationId),
+              "customer_id": parseInt(animal.customerId)
           })
           .then(() => history.push(`/animals/detail/${animal.id}`))
         } else {
           //POST - add
           addAnimal({
-              name: animal.name,
-              locationId: parseInt(animal.locationId),
-              customerId: parseInt(animal.customerId),
-              id: animal.id
+              "name": animal.name,
+              "status": "Recreation",
+              "breed": "kitty kat",
+              "location_id": parseInt(animal.locationId),
+              "customer_id": parseInt(animal.customerId),
           })
           .then(() => history.push("/animals"))
         }
@@ -111,7 +113,7 @@ export const AnimalForm = () => {
               <option value="0">Select a customer</option>
               {customers.map(c => (
                 <option key={c.id} value={c.id}>
-                    {c.name}
+                    {c.full_name}
                 </option>
               ))}
             </select>
